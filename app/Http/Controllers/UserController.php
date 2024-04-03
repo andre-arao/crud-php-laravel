@@ -27,9 +27,9 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(User $user)
     {
-        return view('user_create');
+        return view('user_create',  ['user' => $user]);
     }
 
     /**
@@ -44,7 +44,7 @@ class UserController extends Controller
             'password' => password_hash($request->input('password'), PASSWORD_DEFAULT)]);
 
         if ($created){
-            return redirect()->back()->with('message', 'Successfully create');
+            return redirect()->route('users.index')->with('message', 'Successfully create');
         }
         return redirect()->back()->with('message', 'Error create');
     }
@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        var_dump($user);
+        return view('user_show', ['user' => $user]);
     }
 
     /**
@@ -72,7 +72,7 @@ class UserController extends Controller
     {
         $updated = $this->user->where('id', $id)->update($request->except(['_token', '_method', 'updated_at']));
         if ($updated){
-            return redirect()->back()->with('message', 'Successfully update');
+            return redirect()->route('users.index')->with('message', 'Successfully update');
         }
         return redirect()->back()->with('message', 'Error update');
     }
@@ -82,6 +82,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->user->where('id', $id)->delete();
+
+        return redirect()->route('users.index');
+    }
+
+    public function voltar()
+    {
+        return redirect()->route('users.index');
     }
 }

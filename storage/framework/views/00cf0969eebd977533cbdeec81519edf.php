@@ -15,6 +15,12 @@
         <input type="text" name="email" value="<?php echo e($user -> email); ?>">
         <button type="submit">Update</button>
     </form>
+    <form action="<?php echo e(route('users.index', ['user' => $user->id])); ?>" method="post">
+        <?php echo csrf_field(); ?>
+        <input type="hidden" name="_method" value="get">
+        <button type="submit">Voltar</button>
+    </form>
+
 
 <?php $__env->stopSection(); ?>
 
