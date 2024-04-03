@@ -1,5 +1,6 @@
 <?php $__env->startSection('content'); ?>
-
+    <a href="<?php echo e(route('users.create')); ?>">Create</a>
+    <hr>
 <h1>Users</h1>
 
 <ul>

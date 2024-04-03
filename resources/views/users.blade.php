@@ -1,7 +1,8 @@
 @extends('master')
 
 @section('content')
-
+    <a href="{{route('users.create')}}">Create</a>
+    <hr>
 <h1>Users</h1>
 
 <ul>
